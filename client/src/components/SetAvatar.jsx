@@ -118,6 +118,7 @@ const Container = styled.div`
   background-color: #131324;
   height: 100vh;
   width: 100vw;
+  cursor:pointer;
   .loader {
     max-inline-size: 100%;
   }
@@ -136,10 +137,10 @@ const Container = styled.div`
       display: flex;
       justify-content: center;
       align-items: center;
-      transition: 0.5s ease-in-out;
+      transition: 0.3s ease-in-out;
       img {
         height: 6rem;
-        transition: 0.5s ease-in-out;
+        transition: 0.3s ease-in-out;
       }
     }
     .selected {

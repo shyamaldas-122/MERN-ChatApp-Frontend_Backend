@@ -88,7 +88,7 @@ fetchData()
             <h3>{currentChat.username}</h3>
           </div>
         </div>
-        <Logout />
+        {/* <Logout /> */}
       </div>
       <div className="chat-messages">
         {messages.map((message) => {
@@ -125,6 +125,10 @@ const Container = styled.div`
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
+    padding-top:0.7rem;
+    padding-bottom:0.5rem;
+    ${'' /* background-color:#756AB6; */}
+    background-color:#596FB7;
     .user-details {
       display: flex;
       align-items: center;
@@ -173,13 +177,15 @@ const Container = styled.div`
     .sended {
       justify-content: flex-end;
       .content {
-        background-color: #4f04ff21;
+        ${'' /* background-color: #4f04ff21; */}
+        background-color: #4942E4;
       }
     }
     .recieved {
       justify-content: flex-start;
       .content {
-        background-color: #9900ff20;
+        ${'' /* background-color: #9900ff20; */}
+        background-color: #D63484;
       }
     }
   }

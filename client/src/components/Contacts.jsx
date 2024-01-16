@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Logo from "../assets/logo.svg";
 import conf from '../conf/conf'
+import Logout from "./Logout";
 
 export default function Contacts({ contacts, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
@@ -53,7 +54,9 @@ export default function Contacts({ contacts, changeChat }) {
               );
             })}
           </div>
+          
           <div className="current-user">
+          <div className="logout"><Logout/></div>
             <div className="avatar">
               <img
                 src={`data:image/svg+xml;base64,${currentUserImage}`}
@@ -103,7 +106,7 @@ const Container = styled.div`
     }
     .contact {
       background-color: #ffffff34;
-      min-height: 5rem;
+      min-height: 4.7rem;
       cursor: pointer;
       width: 90%;
       border-radius: 0.2rem;
@@ -111,7 +114,7 @@ const Container = styled.div`
       display: flex;
       gap: 1rem;
       align-items: center;
-      transition: 0.5s ease-in-out;
+      transition: 0.3s ease-in-out;
       .avatar {
         img {
           height: 3rem;
@@ -126,6 +129,10 @@ const Container = styled.div`
     .selected {
       background-color: #9a86f3;
     }
+  }
+  .logout{
+    position: absolute;
+    left: 10px;
   }
   .current-user {
     background-color: #0d0d30;

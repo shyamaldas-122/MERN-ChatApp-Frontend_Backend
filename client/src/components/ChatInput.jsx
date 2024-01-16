@@ -7,36 +7,45 @@ import Picker from "emoji-picker-react";
 export default function ChatInput({ handleSendMsg }) {
   const [msg, setMsg] = useState("");
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const handleEmojiPickerhideShow = () => {
+  const toggleEmojiPicker = () => {
     setShowEmojiPicker(!showEmojiPicker);
-  };
-
-  const handleEmojiClick = (event, emojiObject) => {
-    let message = msg;
-    message += emojiObject.emoji;
-    setMsg(message);
   };
 
   const sendChat = (event) => {
     event.preventDefault();
+    setShowEmojiPicker(false);
     if (msg.length > 0) {
       handleSendMsg(msg);
       setMsg("");
     }
   };
 
+  const EmojiPickerContainer = styled.div`
+  position: absolute;
+  top: -470px;
+  background-color: #080420;
+  box-shadow: 0 5px 10px #9a86f3;
+  border-color: #9a86f3;
+  transform: translateX(-50%,-50%);
+`;
+
+
   return (
     <Container>
       <div className="button-container">
-        <div className="emoji">
-          <BsEmojiSmileFill onClick={handleEmojiPickerhideShow} />
-          {showEmojiPicker && <Picker onEmojiClick={handleEmojiClick} />}
-        </div>
+      <div className="emoji">
+      <BsEmojiSmileFill onClick={toggleEmojiPicker} />
+        {showEmojiPicker && (
+        <EmojiPickerContainer>
+          <Picker onEmojiClick={(emojiObject)=> setMsg((prevMsg)=> prevMsg + emojiObject.emoji)}/>
+        </EmojiPickerContainer>
+      )}
+      </div>
       </div>
       <form className="input-container" onSubmit={(event) => sendChat(event)}>
         <input
           type="text"
-          placeholder="type your message here"
+          placeholder="Type your message here"
           onChange={(e) => setMsg(e.target.value)}
           value={msg}
         />
@@ -65,36 +74,11 @@ const Container = styled.div`
     gap: 1rem;
     .emoji {
       position: relative;
+      cursor:pointer;
       svg {
         font-size: 1.5rem;
         color: #ffff00c8;
         cursor: pointer;
-      }
-      .emoji-picker-react {
-        position: absolute;
-        top: -350px;
-        background-color: #080420;
-        box-shadow: 0 5px 10px #9a86f3;
-        border-color: #9a86f3;
-        .emoji-scroll-wrapper::-webkit-scrollbar {
-          background-color: #080420;
-          width: 5px;
-          &-thumb {
-            background-color: #9a86f3;
-          }
-        }
-        .emoji-categories {
-          button {
-            filter: contrast(0);
-          }
-        }
-        .emoji-search {
-          background-color: transparent;
-          border-color: #9a86f3;
-        }
-        .emoji-group:before {
-          background-color: #080420;
-        }
       }
     }
   }
@@ -113,6 +97,7 @@ const Container = styled.div`
       border: none;
       padding-left: 1rem;
       font-size: 1.2rem;
+      height:40px;
       &::selection {
         background-color: #9a86f3;
       }
@@ -128,6 +113,7 @@ const Container = styled.div`
       align-items: center;
       background-color: #9a86f3;
       border: none;
+      cursor:pointer;
       @media screen and (min-width: 720px) and (max-width: 1080px) {
         padding: 0.3rem 1rem;
         svg {
