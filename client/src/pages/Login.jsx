@@ -10,10 +10,11 @@ import conf from '../conf/conf'
 
 export default function Login() {
   const navigate = useNavigate();
-  const [values, setValues] = useState({ username: "", password: "" });
+  const [values, setValues] = useState({ email: "", password: "" });
+  const [loading,setLoading]=useState(false);
   const toastOptions = {
-    position: "bottom-right",
-    autoClose: 8000,
+    position: "top-right",
+    autoClose: 5000,
     pauseOnHover: true,
     draggable: true,
     theme: "dark",
@@ -29,8 +30,8 @@ export default function Login() {
   };
 
   const validateForm = () => {
-    const { username, password } = values;
-    if (username === "") {
+    const { email, password } = values;
+    if (email === "") {
       toast.error("Email and Password is required.", toastOptions);
       return false;
     } else if (password === "") {
@@ -43,12 +44,14 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (validateForm()) {
-      const { username, password } = values;
+      setLoading(true);
+      const { email, password } = values;
       const { data } = await axios.post(loginRoute, {
-        username,
+        email,
         password,
       });
       if (data.status === false) {
+        setLoading(false);
         toast.error(data.msg, toastOptions);
       }
       if (data.status === true) {
@@ -71,11 +74,10 @@ export default function Login() {
             <h1>Snaply</h1>
           </div>
           <input
-            type="text"
-            placeholder="Username"
-            name="username"
+            type="email"
+            placeholder="Email"
+            name="email"
             onChange={(e) => handleChange(e)}
-            min="3"
           />
           <input
             type="password"
@@ -83,7 +85,35 @@ export default function Login() {
             name="password"
             onChange={(e) => handleChange(e)}
           />
-          <button type="submit">Log In</button>
+          <button type="submit">
+          {loading?
+                  (<svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 50 50"
+                    style={{ textAlign: "center", fontSize: "15px", width: "30px" }}
+                  >
+                    <circle
+                      cx="25"
+                      cy="25"
+                      r="20"
+                      fill="none"
+                      strokeWidth="5"
+                      stroke="#ccc"
+                      strokeDasharray="31.41592653589793 31.41592653589793"
+                    >
+                      <animateTransform
+                        attributeName="transform"
+                        attributeType="XML"
+                        type="rotate"
+                        from="0 25 25"
+                        to="360 25 25"
+                        dur="1s"
+                        repeatCount="indefinite"
+                      />
+                    </circle>
+                  </svg>):"Log In"}</button>
           <span>
             Don't have an account ? <Link to="/register">Create Account</Link>
           </span>

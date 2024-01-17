@@ -5,6 +5,10 @@ import Logout from "./Logout";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { sendMessageRoute, recieveMessageRoute } from "../utils/APIRoutes";
+import { FaPhone } from 'react-icons/fa';
+import { FaVideo } from 'react-icons/fa';
+import { FaEllipsisV } from 'react-icons/fa';
+
 import conf from '../conf/conf'
 
 export default function ChatContainer({ currentChat, socket }) {
@@ -87,6 +91,11 @@ fetchData()
           <div className="username">
             <h3>{currentChat.username}</h3>
           </div>
+        </div>
+        <div>
+        <FaPhone size={23} color="#333" style={{ transform: 'rotate(90deg)', marginRight:"15px", cursor:"pointer"}}/>
+        <FaVideo size={27} color="#333" style={{ marginRight:"10px",cursor:"pointer"}}/>
+        <FaEllipsisV size={23} color="#333" style={{ marginRight:"-10px",cursor:"pointer"}}/>
         </div>
         {/* <Logout /> */}
       </div>

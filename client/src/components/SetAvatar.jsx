@@ -16,8 +16,8 @@ export default function SetAvatar() {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedAvatar, setSelectedAvatar] = useState(undefined);
   const toastOptions = {
-    position: "bottom-right",
-    autoClose: 8000,
+    position: "top-right",
+    autoClose: 5000,
     pauseOnHover: true,
     draggable: true,
     theme: "dark",

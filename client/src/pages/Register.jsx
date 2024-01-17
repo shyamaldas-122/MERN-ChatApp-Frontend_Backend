@@ -11,8 +11,8 @@ import conf from '../conf/conf'
 export default function Register() {
   const navigate = useNavigate();
   const toastOptions = {
-    position: "bottom-right",
-    autoClose: 8000,
+    position: "top-right",
+    autoClose: 5000,
     pauseOnHover: true,
     draggable: true,
     theme: "dark",
@@ -23,6 +23,8 @@ export default function Register() {
     password: "",
     confirmPassword: "",
   });
+
+  const [loading,setLoading]=useState(false);
 
   useEffect(() => {
     if (localStorage.getItem(conf.userKey)) {
@@ -65,6 +67,7 @@ export default function Register() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (handleValidation()) {
+      setLoading(true);
       const { email, username, password } = values;
       const { data } = await axios.post(registerRoute, {
         username,
@@ -119,7 +122,35 @@ export default function Register() {
             name="confirmPassword"
             onChange={(e) => handleChange(e)}
           />
-          <button type="submit">Create Account</button>
+          <button type="submit">
+          {loading? 
+                  (<svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="40"
+                    height="40"
+                    viewBox="0 0 50 50"
+                    style={{ textAlign: "center", fontSize: "15px", width: "30px" }}
+                  >
+                    <circle
+                      cx="25"
+                      cy="25"
+                      r="20"
+                      fill="none"
+                      strokeWidth="5"
+                      stroke="#ccc"
+                      strokeDasharray="31.41592653589793 31.41592653589793"
+                    >
+                      <animateTransform
+                        attributeName="transform"
+                        attributeType="XML"
+                        type="rotate"
+                        from="0 25 25"
+                        to="360 25 25"
+                        dur="1s"
+                        repeatCount="indefinite"
+                      />
+                    </circle>
+                  </svg>):"Create Account"}</button>
           <span>
             Already have an account ? <Link to="/login">Login</Link>
           </span>

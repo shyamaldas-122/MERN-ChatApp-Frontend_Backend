@@ -65,6 +65,7 @@ export default function Contacts({ contacts, changeChat }) {
             </div>
             <div className="username">
               <h2>{currentUserName}</h2>
+              <span style={{color:"#027148", backgroundColor:"#90ee90", borderRadius:"1rem", top:"5px", display:"flex", justifyContent: "space-evenly"}}>online</span>
             </div>
           </div>
         </Container>
