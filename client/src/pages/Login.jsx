@@ -71,7 +71,7 @@ export default function Login() {
         <form action="" onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
             <img src={Logo} alt="logo" />
-            <h1>Snaply</h1>
+            <h1>Chatlify</h1>
           </div>
           <input
             type="email"
